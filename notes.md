@@ -64,4 +64,18 @@ Object.defineProperty(NextImage, 'default', {
 });
 ```
 
+## 5. Prettier
+`npm install --save-dev --save-exact prettier`
+` npm i -D eslint-plugin-prettier`
+
+_.eslintrc.json_
+```json
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+```
+
 
