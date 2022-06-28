@@ -78,4 +78,22 @@ _.eslintrc.json_
   }
 ```
 
+## 6. CSS-IN-JS. EmotionJS
+
+use _raw strings_
+` npm i --save @emotion/styled @emotion/react`
+
+## 7. The first component
+
+---
+Error:
+Cannot find module 'webpack/lib/util/makeSerializable.js"
+https://github.com/storybookjs/storybook/issues/15336
+
+Solution:
+install webpack as a dev dependency
+```
+---
+
+
 
