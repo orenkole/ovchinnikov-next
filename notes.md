@@ -25,3 +25,43 @@ Add "plugin:storybook/recommended"
 ```
 
 `npm run storybook`
+
+## 4. Images Optimization and Storybook
+
+_.storybook/main.js_
+
+create file
+_coursesbox/stories/Home.stories.tsx_
+```jsx
+import Home from "../pages";
+
+export default {
+    title: 'Pages/Home',
+    Component: Home,
+}
+
+export const HomePage = () => <Home />
+```
+
+We don't have image in storybook
+
+Big part of Next is Image component and Image optimization
+
+Point to static folder `-s ./public`  
+_package.json_
+```json
+    "storybook": "start-storybook -p 6006 -s ./public",
+```
+_coursesbox/.storybook/preview.js_
+```javascript
+import * as NextImage from "next/image";
+
+const OriginalNextImage = NextImage.default;
+
+Object.defineProperty(NextImage, 'default', {
+    configurable: true,
+    value: (props) => <OriginalNextImage {...props} unoptimized />
+});
+```
+
+
