@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import {FC} from "react";
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -67,6 +68,12 @@ const Home: NextPage = () => {
       </footer>
     </div>
   )
+}
+
+const Header: FC = (props) => {
+    return <header className="App-header">
+        {props.children}
+    </header>
 }
 
 export default Home
