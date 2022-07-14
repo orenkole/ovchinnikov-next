@@ -92,8 +92,89 @@ https://github.com/storybookjs/storybook/issues/15336
 
 Solution:
 install webpack as a dev dependency
+
+
+# Section 2. The power of storybook
+
+## Jest and react testing library
+
+`npm i --save-dev jest @testing-library/react @testing-library/jest-dom`  
+`npm i --save-dev jest-environment-jsdom`  
+
+create _jest.config.js_  
+```javascript
+const nextJest = require("next/jest")
+
+const createJestConfig = nextJest({
+    // Provide tha path to your Next.js app to load next.config.jad and .env files in your test environment
+    dir: "./",
+});
+
+// Add any custom config to be passed to Jest
+const customJestConfig = {
+    // Add more setup options before each test is run
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+    // if using Typescript with a baseUrl st to the root directory then you need the below for aliases to work
+    moduleDirectories: ["node_modules", "<rootDir>/"],
+    testEnvironment: "jest-environment-jsdom",
+};
+
+// createJestConfig is exported this wat to ensure that next/jest can load the Next.js config which is async
+module.exports = createJestConfig(customJestConfig);
 ```
+
+_jest.setup.js_  
+```javascript
+import '@testing-library/jest-dom/extend-expect'
+```
+https://github.com/testing-library/jest-dom
+
+Add _test_ script  
+_package.json_  
+```json
+"test": "jest"
+```
+
+Write test for _Button_  
+```tsx
+import React from "react";
+import {render} from "@testing-library/react";
+import {Button} from "./Button";
+
+describe("Button test cases", () => {
+    it("Render check", () => {
+        const onClick = jest.fn();
+        const { asFragment } = render(<Button onClick={onClick}>
+            Button
+        </Button>)
+
+        expect(asFragment()).toMatchSnapshot();
+    })
+})
+```
+
+We've got a snapshot.  
+
+Change text it component.  
+Snapshot testing fails.  
+
 ---
 
+Test click:
 
+`npm i --save-dev @testing-library/user-event`
+
+_Button.test.tsx_  
+```tsx
+    it("Check onClick callbck", () => {
+        const onClick = jest.fn();
+        render(<Button onClick={onClick}>Button</Button>)
+        // screen.debug();
+        const element = screen.getByRole('button');
+        userEvent.click(element);
+        expect(onClick).toHaveBeenCalled();
+    })
+```
+
+_userEvent_ acts as real user, instead of _fireEvent_  
 
