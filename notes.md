@@ -178,3 +178,61 @@ _Button.test.tsx_
 
 _userEvent_ acts as real user, instead of _fireEvent_  
 
+## Dark / Light themes in Storybook
+
+install background addon:  
+`npm i -D @storybook/addon-backgrounds`
+
+in _coursesbox/.storybook/preview.js_ we are able to export decorators that can be applied to our story:
+```javascript
+const withThemeProvider = (Story, context) => {
+    console.log('context.globals.backgrounds', context.globals.backgrounds)
+    return (
+        <Story {...context} />
+    )
+}
+
+export const decorators = [withThemeProvider]
+
+export const parameters = {
+    backgrounds: {
+        default: 'dark',
+        values: [
+            { name: 'dark', value: '#5e5c64' },
+            { name: 'light', value: '#e4ebf5'}
+        ]
+    },
+```
+![img.png](images-notes/storybook-theme.png)
+
+Fix typing: https://emotion.sh/docs/typescript#define-a-theme  
+_emotion.d.ts_  
+```ts
+import '@emotion/react'
+
+declare module '@emotion/react' {
+    export interface Theme extends Record<string, any> {}
+}
+```
+
+Use in component:   
+```tsx
+export const getColors = (theme: AppTheme, color?: Color): SerializedStyles => {
+    switch (color) {
+        case "primary":
+            return css`
+        background: ${theme.components[color]};
+        color: ${theme.font.button};
+      `;
+// ...
+export const Button = styled.button<Props>`
+  ${({theme}) => `box-shadow: 0.5vmin 0.5vmin 1vmin ${theme.components.shadow1}, -0.5vmin -0.5vmin 1vmin ${theme.components.shadow1};`}
+```
+
+Fix typings:  
+_coursesbox/.storybook/main.js_  
+```json
+  "features": {
+      "emotionAlias": false
+  }
+```
