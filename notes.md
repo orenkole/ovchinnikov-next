@@ -324,3 +324,47 @@ ${({theme}) => boxShadow(theme.components.shadow1, theme.components.shadow2)};
   }
   `
 ```
+
+## Aliases and themes for Jest
+
+```bash
+(node:3113) DeprecationWarning: --static-dir CLI flag is deprecated, see:
+
+https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecated---static-dir-cli-flag
+```
+_package.json_
+```json
+"storybook": "start-storybook -p 6006",
+```
+
+_coursesbox/.storybook/main.js_
+```json
+  "staticDirs": ["../public"],
+```
+
+---
+
+_coursesbox/test-utils.tsx_
+```tsx
+import { FC, ReactElement } from "react";
+import { render, RenderOptions } from "@testing-library/react";
+import { ThemeProvider } from "@emotion/react";
+
+import { Themes } from "./styles/themes";
+
+const Wrapper: FC = ({ children }) => (
+    <ThemeProvider theme={Themes.light}>{children}</ThemeProvider>
+);
+
+const customRender = (
+    ui: ReactElement,
+    options?: RenderOptions
+) => {
+    return render(ui, { wrapper: Wrapper, ...options });
+};
+
+export {customRender as render};
+```
+
+`npm test -- -u`  
+

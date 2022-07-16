@@ -1,7 +1,8 @@
 import React from "react";
-import {render, screen} from "@testing-library/react";
+import { screen} from "@testing-library/react";
 import {Button} from "./Button";
 import userEvent from "@testing-library/user-event";
+import {render} from "../../test-utils";
 
 describe("Button test cases", () => {
     it("Render check", () => {
@@ -16,7 +17,7 @@ describe("Button test cases", () => {
     it("Check onClick callbck", () => {
         const onClick = jest.fn();
         render(<Button onClick={onClick}>Button</Button>)
-        // screen.debug();
+        screen.debug();
         const element = screen.getByRole('button');
         userEvent.click(element);
         expect(onClick).toHaveBeenCalled();
