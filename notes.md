@@ -236,3 +236,12 @@ _coursesbox/.storybook/main.js_
       "emotionAlias": false
   }
 ```
+
+## Aliases, Fonts and Global styles
+_tsconfig.json_  
+```json
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    },
+```
