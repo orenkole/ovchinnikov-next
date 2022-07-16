@@ -245,3 +245,82 @@ _tsconfig.json_
       "@/*": ["./*"]
     },
 ```
+_Button.tsx_
+```tsx
+import {AppTheme} from "@/styles/themes";
+```
+---
+
+Global fonts:  
+create file:  
+_coursesbox/.storybook/preview-head.html_
+```html
+<link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&display=swap" rel="stylesheet">
+```
+
+create file:  
+_coursesbox/styles/global.ts_
+```ts
+import { css } from "@emotion/react";
+
+export const GlobalStyles = css`
+  * {
+    font-family: "Poppins", sans-serif;
+  }
+`;
+```
+
+_coursesbox/.storybook/preview.js_  
+```tsx
+import {..., Global} from "@emotion/react";
+
+const withGlobalStyles = (Story, context) => (
+    <>
+        <Global styles={GlobalStyles} />
+        <Story {...context} />
+    </>
+)
+
+export const decorators = [..., withGlobalStyles]
+```
+
+---
+
+Move styles to a util:  
+crete file:  
+_coursesbox/components/style.ts_
+```ts
+import { css } from "@emotion/react";
+
+// https://github.com/styled-components/styled-components/issues/397
+
+export const boxShadow = (
+    shadowColor1: string,
+    shadowColor2: string,
+    inset = false
+) => {
+    const insetStr = inset ? "inset" : "";
+    return css`
+    box-shadow: ${insetStr} 0.5vmin 0.5vmin 1vmin ${shadowColor1},
+      ${insetStr} -0.5vmin -0.5vmin 1vmin ${shadowColor2};
+  `;
+};
+
+export const transition = () =>
+    css`
+    transition: all 0.4s ease;
+  `;
+```
+
+use in component:  
+_Button.tsx_
+```tsx
+export const Button = styled.button<Props>`
+  ${transition()};
+  //...
+${({theme}) => boxShadow(theme.components.shadow1, theme.components.shadow2)};
+  &:active {
+    ${({theme}) => boxShadow(theme.components.shadow1, theme.components.shadow2, true)};
+  }
+  `
+```
