@@ -9,6 +9,9 @@ const createJestConfig = nextJest({
 const customJestConfig = {
     // Add more setup options before each test is run
     setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+    // moduleNameMapper: {
+    //     "^@/(.*)$": "<rootDir>/$1",
+    // },
     // if using Typescript with a baseUrl st to the root directory then you need the below for aliases to work
     moduleDirectories: ["node_modules", "<rootDir>/"],
     testEnvironment: "jest-environment-jsdom",
