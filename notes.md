@@ -419,3 +419,11 @@ _main.js_
     "@storybook/addon-a11y",
 ```
 ![img.png](images-notes/a11y.png)
+
+## Visual testing and Chromatic
+`npm i -D chromatic`  
+
+split subfolder to subtree:  
+https://flaviocopes.com/how-to-handle-git-subrepositories/  
+
+`npx chromatic --project-token=<token>`  

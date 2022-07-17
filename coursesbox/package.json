@@ -9,7 +9,8 @@
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "test": "jest"
+    "test": "jest",
+    "chromatic": "npx chromatic --project-token=d1f1b4e4b6c2"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -38,6 +39,7 @@
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
     "babel-loader": "^8.2.5",
+    "chromatic": "^6.7.0",
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6",
     "eslint-plugin-prettier": "^4.1.0",
@@ -48,5 +50,7 @@
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "typescript": "4.7.4",
     "webpack": "^5.73.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "coursesbox@0.1.0"
 }
