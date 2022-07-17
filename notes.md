@@ -382,4 +382,40 @@ _coursesbox/.storybook/main.js_
 
 We have 2 ways to organize story:  
 - ComponentStory - use _bind_ for properties for particular story
-- ComponentStoryObj - 
+- ComponentStoryObj
+
+_Button.stories.tsx_
+```tsx
+import {expect} from "@storybook/jest";
+import {screen, userEvent} from "@storybook/testing-library";
+
+import { Button } from "./Button";
+
+export const PrimaryButton: ComponentStoryObj<typeof Button> =  {
+    play: async({args}) => {
+      await userEvent.click(screen.getByRole('button'));
+      await expect(args.onClick).toHaveBeenCalled();
+    },
+    args: {
+        color: 'primary'
+    }
+}
+
+export const SecondaryButton: ComponentStoryObj<typeof Button> =  {
+    ...PrimaryButton,
+    args: {
+        color: 'secondary'
+    }
+}
+```
+
+## Storybook addon a11y
+
+`% npm i -D @storybook/addon-a11y`  
+_main.js_ 
+```js
+  "addons": [
+//...
+    "@storybook/addon-a11y",
+```
+![img.png](images-notes/a11y.png)
