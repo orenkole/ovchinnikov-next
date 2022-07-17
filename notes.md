@@ -368,3 +368,18 @@ export {customRender as render};
 
 `npm test -- -u`  
 
+## Storybook addon interactions
+
+How we can write test cases in storybook directly  
+` % npm i -D @storybook/addon-interactions @storybook/jest @storybook/testing-library`  
+
+_coursesbox/.storybook/main.js_  
+```json
+  "addons": [
+...
+    "@storybook/addon-interactions"
+```
+
+We have 2 ways to organize story:  
+- ComponentStory - use _bind_ for properties for particular story
+- ComponentStoryObj - 
