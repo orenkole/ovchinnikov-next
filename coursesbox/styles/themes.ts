@@ -12,7 +12,7 @@ const dark = {
         nonActive: "#9baacf",
         primary: "#6d5dfc",
         danger: "#dc3545e6",
-        warning: "#ffca2ce6;",
+        warning: "#ffca2ce6",
     },
     font: {
         regular: "#E4EBF5e6",
@@ -38,7 +38,7 @@ const light: AppTheme = {
         nonActive: "#9baacf",
         primary: "#6d5dfc",
         danger: "#dc3545e6",
-        warning: "#ffca2ce6;",
+        warning: "#ffca2ce6",
     },
     font: {
         regular: "#504e55e6",
