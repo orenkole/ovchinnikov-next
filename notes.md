@@ -427,3 +427,6 @@ split subfolder to subtree:
 https://flaviocopes.com/how-to-handle-git-subrepositories/  
 
 `npx chromatic --project-token=<token>`  
+
+https://stackoverflow.com/a/25815116  
+`git rebase -i YOUR_SHA -x "git commit --amend --author 'New Name <new_address@example.com>' -CHEAD"`  
