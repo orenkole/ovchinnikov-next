@@ -461,4 +461,66 @@ https://stackoverflow.com/a/25815116
 
 # Section 3. Storybook and components library
 
+## Tile component
+commit
+https://github.com/orenkole/ovchinnikov-next/commit/5e6b1294daff7cf3ae7ade3bc1f80660eff360e2
 
+## Icon component
+https://reactsvgicons.com/
+
+_components/Icon/index.tsx_
+```js
+import React, {FC} from "react";
+import styled from "@emotion/styled";
+import {Icons} from "@/components/Icon/Icons";
+
+export type AvailableIcons = keyof  typeof Icons;
+
+type WrapperProps = {
+  /** Icon width and height **/
+  size: string;
+}
+
+export type Props = {
+  /** Icon name **/
+  name: AvailableIcons;
+} & WrapperProps & React.SVGProps<SVGSVGElement>
+
+const Wrapper = styled.div<WrapperProps>`
+  color: ${({theme}) => theme.font.regular};
+  width: ${({size}) => size};
+  height: ${({size}) => size};
+`;
+
+export const Icon: FC<Props> = ({name, size = "2rem", ...rest}) => {
+  const Icon = Icons[name];
+  const sizes = {width: size, height: size};
+  return (
+    <Wrapper size={size}>
+      <Icon {...sizes} {...rest} />
+    </Wrapper>
+  )
+};
+```
+
+_coursesbox/components/Icon/Icon.stories.tsx_
+```tsx
+import React from "react";
+import {ComponentStory, ComponentMeta} from "@storybook/react";
+
+import {Icon} from "./index";
+
+export default {
+    title: 'Content/Icon',
+    component: Icon,
+} as ComponentMeta<typeof Icon>
+
+const Template: ComponentStory<typeof Icon> = (args) => <Icon {...args} />;
+
+export const BasicIcon = Template.bind({});
+BasicIcon.args = {
+    name: 'Home'
+}
+```
+we've got automatic documentation:
+![img.png](images-notes/icon-storybook.png)
