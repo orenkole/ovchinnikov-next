@@ -324,7 +324,33 @@ ${({theme}) => boxShadow(theme.components.shadow1, theme.components.shadow2)};
   }
   `
 ```
+---
 
+Problem: Module not found  
+
+Solution: https://storybook.js.org/docs/react/builders/webpack#typescript-module-resolution  
+
+_coursesbox/.storybook/main.js_
+```javascript
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+
+webpackFinal: async (config) => {
+  config.resolve.plugins = [
+    ...(config.resolve.plugins || []),
+    new TsconfigPathsPlugin({
+      extensions: config.resolve.extensions,
+    }),
+  ];
+  return config;
+}
+```
+
+_tsconfig.js_
+```json
+  "compilerOptions": {
+//..
+    "baseUrl": ".",
+```
 ## Aliases and themes for Jest
 
 ```bash
@@ -430,3 +456,9 @@ https://flaviocopes.com/how-to-handle-git-subrepositories/
 
 https://stackoverflow.com/a/25815116  
 `git rebase -i YOUR_SHA -x "git commit --amend --author 'New Name <new_address@example.com>' -CHEAD"`  
+
+`git rebase -i 306f3b2d5db7bfb8c2a4ce8659eca2ec1d2076bf -x "git commit --amend --author 'orenkole <orenkole@gmail.com>' -CHEAD"`
+
+# Section 3. Storybook and components library
+
+
