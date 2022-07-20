@@ -524,3 +524,6 @@ BasicIcon.args = {
 ```
 we've got automatic documentation:
 ![img.png](images-notes/icon-storybook.png)
+
+## Checkbox component
+
