@@ -526,4 +526,8 @@ we've got automatic documentation:
 ![img.png](images-notes/icon-storybook.png)
 
 ## Checkbox component
+commit 
+
+## Custom hook useId
+`npm i @testing-library/react-hooks`  
 
