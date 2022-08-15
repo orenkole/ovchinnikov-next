@@ -28,11 +28,11 @@ const Button = styled.button<ButtonProps>`
 `;
 
 export type Props = {
-    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 } & IconProps
 
 export const IconButton: FC<Props> = ({onClick, ...props}) => (
-    <Button onClick={onClick} size={`${(props.size || 2) * 2}rem`}>
-        <Icon {...props} />
-    </Button>
+  <Button onClick={onClick} size={`${(props.size || 2) * 2}rem`} title={props.name}>
+    <Icon {...props} />
+  </Button>
 )
